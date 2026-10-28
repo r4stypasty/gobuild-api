@@ -60,7 +60,7 @@ go run cmd/api/main.go
 ## 📈 Project Status
 
 * **Current Status**: 🚧 *In Active Development*
-* **Version**: `0.1.0-alpha`
+* **Version**: `0.2.0-alpha`
 
 *This repository represents an MVP (Minimum Viable Product).
 
