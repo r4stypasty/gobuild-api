@@ -31,6 +31,7 @@ func main() {
 	})
 
 	r.Get("/materials", materialHandler.GetMaterials)
+	r.Post("/materials", materialHandler.CreateMaterial)
 
 	fmt.Println("Server is starting on http://localhost:8080")
 	err = http.ListenAndServe(":8080", r)
