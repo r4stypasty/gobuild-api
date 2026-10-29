@@ -189,3 +189,5 @@ func (h *MaterialHandler) GetAlerts(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(alerts)
 }
+
+// TODO: Implement the UpdateMaterial and DeleteMaterial handlers for full CRUD functionality.

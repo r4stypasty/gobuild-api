@@ -26,14 +26,15 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("gobuild-api is running!"))
+	r.Route("/api/v1", func(r chi.Router) {
+		r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+			w.Write([]byte("gobuild-api is running!"))
+		})
+		r.Get("/materials", materialHandler.GetMaterials)
+		r.Post("/materials", materialHandler.CreateMaterial)
+		r.Post("/materials/{id}/write-off", materialHandler.WriteOffMaterial)
+		r.Get("/alerts", materialHandler.GetAlerts)
 	})
-
-	r.Get("/materials", materialHandler.GetMaterials)
-	r.Post("/materials", materialHandler.CreateMaterial)
-	r.Post("/materials/{id}/write-off", materialHandler.WriteOffMaterial)
-	r.Get("/alerts", materialHandler.GetAlerts)
 
 	fmt.Println("Server is starting on http://localhost:8080")
 	err = http.ListenAndServe(":8080", r)
