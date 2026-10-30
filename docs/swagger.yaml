@@ -1,0 +1,226 @@
+basePath: /api/v1
+definitions:
+  models.Material:
+    properties:
+      current_stock:
+        type: number
+      id:
+        type: integer
+      min_stock:
+        type: number
+      name:
+        type: string
+      unit:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API for automating operational inventory control at construction sites.
+  title: gobuild-api
+  version: 0.4.0-alpha
+paths:
+  /alerts:
+    get:
+      description: Returns materials whose current stock is below or equal to the
+        minimum stock
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get low stock alerts
+      tags:
+      - alerts
+  /materials:
+    get:
+      description: Returns a list of all materials in stock
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Material'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get all materials
+      tags:
+      - materials
+    post:
+      consumes:
+      - application/json
+      description: Adds a new material to the warehouse
+      parameters:
+      - description: Material data
+        in: body
+        name: material
+        required: true
+        schema:
+          $ref: '#/definitions/models.Material'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new material
+      tags:
+      - materials
+  /materials/{id}:
+    delete:
+      description: Deletes a material by its ID
+      parameters:
+      - description: Material ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete a material
+      tags:
+      - materials
+    patch:
+      consumes:
+      - application/json
+      description: Updates specific fields of a material by its ID (PATCH)
+      parameters:
+      - description: Material ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Fields to update
+        in: body
+        name: material
+        schema:
+          $ref: '#/definitions/models.Material'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update a material
+      tags:
+      - materials
+  /materials/{id}/write-off:
+    post:
+      consumes:
+      - application/json
+      description: Decreases the material stock using a transaction to prevent negative
+        balance
+      parameters:
+      - description: Material ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 'Quantity to write off (JSON: {'
+        in: body
+        name: quantity
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Write off material
+      tags:
+      - transactions
+swagger: "2.0"

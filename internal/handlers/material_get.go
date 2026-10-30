@@ -8,6 +8,14 @@ import (
 	"github.com/r4stypasty/gobuild-api/internal/models"
 )
 
+// GetMaterials godoc
+// @Summary      Get all materials
+// @Description  Returns a list of all materials in stock
+// @Tags         materials
+// @Produce      json
+// @Success      200  {array}   models.Material
+// @Failure      500  {object}  map[string]string
+// @Router       /materials [get]
 // GET /materials
 func (h *MaterialHandler) GetMaterials(w http.ResponseWriter, r *http.Request) {
 	rows, err := h.DB.QueryContext(r.Context(), "SELECT id, name, unit, current_stock, min_stock FROM materials")
@@ -44,6 +52,14 @@ func (h *MaterialHandler) GetMaterials(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// GetAlerts godoc
+// @Summary      Get low stock alerts
+// @Description  Returns materials whose current stock is below or equal to the minimum stock
+// @Tags         alerts
+// @Produce      json
+// @Success      200  {array}   map[string]interface{}
+// @Failure      500  {object}  map[string]string
+// @Router       /alerts [get]
 // Alerting for low stock levels
 func (h *MaterialHandler) GetAlerts(w http.ResponseWriter, r *http.Request) {
 	rows, err := h.DB.QueryContext(r.Context(), "SELECT id, name, unit, current_stock, min_stock FROM materials WHERE current_stock <= min_stock")

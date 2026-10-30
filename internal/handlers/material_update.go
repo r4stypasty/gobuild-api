@@ -9,6 +9,19 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
+// UpdateMaterial godoc
+// @Summary      Update a material
+// @Description  Updates specific fields of a material by its ID (PATCH)
+// @Tags         materials
+// @Accept       json
+// @Produce      json
+// @Param        id       path      int             true  "Material ID"
+// @Param        material body      models.Material false "Fields to update"
+// @Success      200      {object}  map[string]string
+// @Failure      400      {object}  map[string]string
+// @Failure      404      {object}  map[string]string
+// @Failure      500      {object}  map[string]string
+// @Router       /materials/{id} [patch]
 // PATCH
 func (h *MaterialHandler) UpdateMaterial(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()

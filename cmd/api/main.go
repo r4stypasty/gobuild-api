@@ -1,3 +1,8 @@
+// @title gobuild-api
+// @version 0.4.0-alpha
+// @description API for automating operational inventory control at construction sites.
+// @host localhost:8080
+// @BasePath /api/v1
 package main
 
 import (
@@ -10,6 +15,9 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/r4stypasty/gobuild-api/internal/handlers"
 	"github.com/r4stypasty/gobuild-api/internal/repository"
+
+	_ "github.com/r4stypasty/gobuild-api/docs"
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 func main() {
@@ -25,6 +33,8 @@ func main() {
 
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
+
+	r.Get("/swagger/*", httpSwagger.WrapHandler)
 
 	r.Route("/api/v1", func(r chi.Router) {
 		r.Get("/", func(w http.ResponseWriter, r *http.Request) {

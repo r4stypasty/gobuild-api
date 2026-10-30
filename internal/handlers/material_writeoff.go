@@ -9,6 +9,18 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
+// WriteOffMaterial godoc
+// @Summary      Write off material
+// @Description  Decreases the material stock using a transaction to prevent negative balance
+// @Tags         transactions
+// @Accept       json
+// @Produce      json
+// @Param        id       path      int     true  "Material ID"
+// @Param        quantity body      object  true  "Quantity to write off (JSON: {"quantity": 10})"
+// @Success      200      {object}  map[string]string
+// @Failure      400      {object}  map[string]string
+// @Failure      500      {object}  map[string]string
+// @Router       /materials/{id}/write-off [post]
 // Transactions
 func (h *MaterialHandler) WriteOffMaterial(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()

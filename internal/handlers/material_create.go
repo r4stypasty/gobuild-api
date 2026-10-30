@@ -8,6 +8,18 @@ import (
 	"github.com/r4stypasty/gobuild-api/internal/models"
 )
 
+// CreateMaterial godoc
+// @Summary      Create a new material
+// @Description  Adds a new material to the warehouse
+// @Tags         materials
+// @Accept       json
+// @Produce      json
+// @Param        material body models.Material true "Material data"
+// @Success      201  {object}  map[string]interface{}
+// @Failure      400  {object}  map[string]string
+// @Failure      422  {object}  map[string]interface{}
+// @Failure      500  {object}  map[string]string
+// @Router       /materials [post]
 // POST /materials
 func (h *MaterialHandler) CreateMaterial(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
