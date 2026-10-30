@@ -30,6 +30,7 @@
 * **Router**: `chi` — a lightweight, idiomatic router fully compatible with the standard library, free of unnecessary bloat.
 * **Database**: `SQLite` (optimized for the MVP stage) with a clear path for seamless migration to `PostgreSQL`. Ensures strict ACID transactions, meaning your data remains safe even if the server crashes.
 * **Documentation**: `Swagger` (OpenAPI 3.0) — fully interactive and ready to test out of the box.
+* **Containerization**: `Docker` — multi-stage build for a tiny, secure production image.
 
 ---
 
@@ -48,19 +49,28 @@
 * **Trigger Notifications**: The `GET /api/v1/alerts` endpoint automatically scans the database to return low-stock items, ready to be exported as a purchase order.
 
 ## 🚀 How to Launch
-
+### Option 1: Local (Go installed)
 To spin up the API server locally, ensure you have Go installed and run the following command in your terminal:
 
 ```bash
 go run cmd/api/main.go
 ```
 
+### Option 2: Docker (Recommended)
+```bash
+docker build -t gobuild-api .
+docker run -p 8080:8080 gobuild-api
+```
 ---
+
+## 📖 Interactive Documentation (Swagger)
+Once the server is running, open your browser and go to:
+👉 `http://localhost:8080/swagger/index.html`
 
 ## 📈 Project Status
 
-* **Current Status**: 🚧 *CRUD completed, moving to documentation*
-* **Version**: `0.4.0-alpha`
+* **Current Status**: 🧪 *MVP Core Ready (CRUD, Transactions, Swagger, Docker)*
+* **Version**: `0.5.0-alpha`
 
 *This repository represents an MVP (Minimum Viable Product).
 
