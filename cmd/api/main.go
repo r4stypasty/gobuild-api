@@ -34,6 +34,7 @@ func main() {
 		r.Post("/materials", materialHandler.CreateMaterial)
 		r.Post("/materials/{id}/write-off", materialHandler.WriteOffMaterial)
 		r.Get("/alerts", materialHandler.GetAlerts)
+		r.Patch("/materials/{id}", materialHandler.UpdateMaterial)
 	})
 
 	fmt.Println("Server is starting on http://localhost:8080")
