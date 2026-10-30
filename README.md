@@ -67,10 +67,21 @@ docker run -p 8080:8080 gobuild-api
 Once the server is running, open your browser and go to:
 👉 `http://localhost:8080/swagger/index.html`
 
+### 🔗 QR code to Swagger Docs
+<p align="center">
+  <a href="https://r4stypasty.github.io/gobuild-api/">
+    <img src=".github/assets/qrcode_docs.png" width="150" alt="QR code to Swagger Docs" />
+  </a>
+  <br>
+  <i>📱 Scan the QR code to open interactive Swagger UI</i>
+  <br>
+  <b>Or click here:</b> <a href="https://r4stypasty.github.io/gobuild-api/">r4stypasty.github.io/gobuild-api</a>
+</p>
+
 ## 📈 Project Status
 
 * **Current Status**: 🧪 *MVP Core Ready (CRUD, Transactions, Swagger, Docker)*
-* **Version**: `0.5.0-alpha`
+* **Version**: `0.6.0-alpha`
 
 *This repository represents an MVP (Minimum Viable Product).
 
