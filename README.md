@@ -78,10 +78,14 @@ Once the server is running, open your browser and go to:
   <b>Or click here:</b> <a href="https://r4stypasty.github.io/gobuild-api/">r4stypasty.github.io/gobuild-api</a>
 </p>
 
+## 🧪 Testing
+For quick testing without setting up Swagger, you can use the Postman collection located in the `/postman` folder. 
+Import it into Postman to test the API endpoints locally. This is useful for CI/CD pipelines or automated testing.
+
 ## 📈 Project Status
 
 * **Current Status**: 🧪 *MVP Core Ready (CRUD, Transactions, Swagger, Docker)*
-* **Version**: `0.6.0-alpha`
+* **Version**: `0.7.0-alpha`
 
 *This repository represents an MVP (Minimum Viable Product).
 
