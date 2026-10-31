@@ -20,6 +20,7 @@ import (
 // @Failure      422  {object}  map[string]interface{}
 // @Failure      500  {object}  map[string]string
 // @Router       /materials [post]
+// @Security ApiKeyAuth
 // POST /materials
 func (h *MaterialHandler) CreateMaterial(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()

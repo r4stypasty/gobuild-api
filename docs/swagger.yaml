@@ -18,7 +18,7 @@ info:
   contact: {}
   description: API for automating operational inventory control at construction sites.
   title: gobuild-api
-  version: 0.4.0-alpha
+  version: 0.7.0-alpha
 paths:
   /alerts:
     get:
@@ -40,6 +40,8 @@ paths:
             additionalProperties:
               type: string
             type: object
+      security:
+      - ApiKeyAuth: []
       summary: Get low stock alerts
       tags:
       - alerts
@@ -61,6 +63,8 @@ paths:
             additionalProperties:
               type: string
             type: object
+      security:
+      - ApiKeyAuth: []
       summary: Get all materials
       tags:
       - materials
@@ -100,6 +104,8 @@ paths:
             additionalProperties:
               type: string
             type: object
+      security:
+      - ApiKeyAuth: []
       summary: Create a new material
       tags:
       - materials
@@ -133,6 +139,8 @@ paths:
             additionalProperties:
               type: string
             type: object
+      security:
+      - ApiKeyAuth: []
       summary: Delete a material
       tags:
       - materials
@@ -178,6 +186,8 @@ paths:
             additionalProperties:
               type: string
             type: object
+      security:
+      - ApiKeyAuth: []
       summary: Update a material
       tags:
       - materials
@@ -220,7 +230,14 @@ paths:
             additionalProperties:
               type: string
             type: object
+      security:
+      - ApiKeyAuth: []
       summary: Write off material
       tags:
       - transactions
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: X-API-Key
+    type: apiKey
 swagger: "2.0"

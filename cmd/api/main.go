@@ -1,8 +1,11 @@
 // @title gobuild-api
-// @version 0.4.0-alpha
+// @version 0.7.0-alpha
 // @description API for automating operational inventory control at construction sites.
 // @host localhost:8080
 // @BasePath /api/v1
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name X-API-Key
 package main
 
 import (
@@ -10,10 +13,12 @@ import (
 	"net/http"
 
 	"log"
+	"os"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
+	chimiddleware "github.com/go-chi/chi/v5/middleware"
 	"github.com/r4stypasty/gobuild-api/internal/handlers"
+	"github.com/r4stypasty/gobuild-api/internal/middleware"
 	"github.com/r4stypasty/gobuild-api/internal/repository"
 
 	_ "github.com/r4stypasty/gobuild-api/docs"
@@ -21,6 +26,11 @@ import (
 )
 
 func main() {
+
+	apiKey := os.Getenv("API_KEY")
+	if apiKey == "" {
+		apiKey = "dev-secret-key" // Default API key for development
+	}
 
 	db, err := repository.InitDB("materials.db")
 	if err != nil {
@@ -32,11 +42,13 @@ func main() {
 	materialHandler := &handlers.MaterialHandler{DB: db}
 
 	r := chi.NewRouter()
-	r.Use(middleware.Logger)
+	r.Use(chimiddleware.Logger)
 
 	r.Get("/swagger/*", httpSwagger.WrapHandler)
 
 	r.Route("/api/v1", func(r chi.Router) {
+		r.Use(middleware.APIKeyAuthMiddleware(apiKey))
+
 		r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			w.Write([]byte("gobuild-api is running!"))
 		})

@@ -49,6 +49,12 @@
 * **Trigger Notifications**: The `GET /api/v1/alerts` endpoint automatically scans the database to return low-stock items, ready to be exported as a purchase order.
 
 ## 🚀 How to Launch
+### Environment Variables
+Before running the server, you need to set the API key. By default, it uses `dev-secret-key` for local development. For production, set your own:
+```bash
+export API_KEY="your-super-secret-key"
+```
+
 ### Option 1: Local (Go installed)
 To spin up the API server locally, ensure you have Go installed and run the following command in your terminal:
 
@@ -59,7 +65,7 @@ go run cmd/api/main.go
 ### Option 2: Docker (Recommended)
 ```bash
 docker build -t gobuild-api .
-docker run -p 8080:8080 gobuild-api
+docker run -p 8080:8080 -e API_KEY=dev-secret-key gobuild-api
 ```
 ---
 
@@ -81,6 +87,14 @@ Once the server is running, open your browser and go to:
 ## 🧪 Testing
 For quick testing without setting up Swagger, you can use the Postman collection located in the `/postman` folder. 
 Import it into Postman to test the API endpoints locally. This is useful for CI/CD pipelines or automated testing.
+
+### API Authorization
+All `/api/v1/*` endpoints are protected. You must include the `X-API-Key` header in your requests.
+- **Default Key:** `dev-secret-key`
+  
+### Postman Collection
+For quick testing without setting up Swagger, you can use the Postman collection located in the `/postman` folder. 
+Import it into Postman. **Important:** Make sure to set the `X-API-Key` header in Postman to `dev-secret-key` to avoid `401 Unauthorized` errors.
 
 ## 📈 Project Status
 

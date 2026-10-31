@@ -17,6 +17,7 @@ import (
 // @Failure      404  {object}  map[string]string
 // @Failure      500  {object}  map[string]string
 // @Router       /materials/{id} [delete]
+// @Security ApiKeyAuth
 func (h *MaterialHandler) DeleteMaterial(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 

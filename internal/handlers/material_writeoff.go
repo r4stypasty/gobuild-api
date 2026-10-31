@@ -21,6 +21,7 @@ import (
 // @Failure      400      {object}  map[string]string
 // @Failure      500      {object}  map[string]string
 // @Router       /materials/{id}/write-off [post]
+// @Security ApiKeyAuth
 // Transactions
 func (h *MaterialHandler) WriteOffMaterial(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()

@@ -4,13 +4,18 @@
         "description": "API for automating operational inventory control at construction sites.",
         "title": "gobuild-api",
         "contact": {},
-        "version": "0.4.0-alpha"
+        "version": "0.7.0-alpha"
     },
     "host": "localhost:8080",
     "basePath": "/api/v1",
     "paths": {
         "/alerts": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Returns materials whose current stock is below or equal to the minimum stock",
                 "produces": [
                     "application/json"
@@ -44,6 +49,11 @@
         },
         "/materials": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Returns a list of all materials in stock",
                 "produces": [
                     "application/json"
@@ -74,6 +84,11 @@
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Adds a new material to the warehouse",
                 "consumes": [
                     "application/json"
@@ -134,6 +149,11 @@
         },
         "/materials/{id}": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Deletes a material by its ID",
                 "tags": [
                     "materials"
@@ -182,6 +202,11 @@
                 }
             },
             "patch": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Updates specific fields of a material by its ID (PATCH)",
                 "consumes": [
                     "application/json"
@@ -252,6 +277,11 @@
         },
         "/materials/{id}/write-off": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Decreases the material stock using a transaction to prevent negative balance",
                 "consumes": [
                     "application/json"
@@ -333,6 +363,13 @@
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "X-API-Key",
+            "in": "header"
         }
     }
 }

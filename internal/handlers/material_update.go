@@ -22,6 +22,7 @@ import (
 // @Failure      404      {object}  map[string]string
 // @Failure      500      {object}  map[string]string
 // @Router       /materials/{id} [patch]
+// @Security ApiKeyAuth
 // PATCH
 func (h *MaterialHandler) UpdateMaterial(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()

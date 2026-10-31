@@ -16,6 +16,7 @@ import (
 // @Success      200  {array}   models.Material
 // @Failure      500  {object}  map[string]string
 // @Router       /materials [get]
+// @Security ApiKeyAuth
 // GET /materials
 func (h *MaterialHandler) GetMaterials(w http.ResponseWriter, r *http.Request) {
 	rows, err := h.DB.QueryContext(r.Context(), "SELECT id, name, unit, current_stock, min_stock FROM materials")
@@ -61,6 +62,7 @@ func (h *MaterialHandler) GetMaterials(w http.ResponseWriter, r *http.Request) {
 // @Failure      500  {object}  map[string]string
 // @Router       /alerts [get]
 // Alerting for low stock levels
+// @Security ApiKeyAuth
 func (h *MaterialHandler) GetAlerts(w http.ResponseWriter, r *http.Request) {
 	rows, err := h.DB.QueryContext(r.Context(), "SELECT id, name, unit, current_stock, min_stock FROM materials WHERE current_stock <= min_stock")
 	if err != nil {

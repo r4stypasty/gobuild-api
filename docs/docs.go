@@ -17,6 +17,11 @@ const docTemplate = `{
     "paths": {
         "/alerts": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Returns materials whose current stock is below or equal to the minimum stock",
                 "produces": [
                     "application/json"
@@ -50,6 +55,11 @@ const docTemplate = `{
         },
         "/materials": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Returns a list of all materials in stock",
                 "produces": [
                     "application/json"
@@ -80,6 +90,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Adds a new material to the warehouse",
                 "consumes": [
                     "application/json"
@@ -140,6 +155,11 @@ const docTemplate = `{
         },
         "/materials/{id}": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Deletes a material by its ID",
                 "tags": [
                     "materials"
@@ -188,6 +208,11 @@ const docTemplate = `{
                 }
             },
             "patch": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Updates specific fields of a material by its ID (PATCH)",
                 "consumes": [
                     "application/json"
@@ -258,6 +283,11 @@ const docTemplate = `{
         },
         "/materials/{id}/write-off": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Decreases the material stock using a transaction to prevent negative balance",
                 "consumes": [
                     "application/json"
@@ -340,12 +370,19 @@ const docTemplate = `{
                 }
             }
         }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "X-API-Key",
+            "in": "header"
+        }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.4.0-alpha",
+	Version:          "0.7.0-alpha",
 	Host:             "localhost:8080",
 	BasePath:         "/api/v1",
 	Schemes:          []string{},
